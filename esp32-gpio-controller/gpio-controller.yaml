@@ -36,8 +36,9 @@ ota:
 
 web_server:
   port: 80
-  version: 3      # DO NOT REMOVE — default is v2; Phase 2 frontend requires v3
-  local: true     # Serve JS assets from device flash (offline-capable)
+  version: 3          # DO NOT REMOVE — default is v2; frontend requires v3
+  # local: true removed — incompatible with js_include (ESPHome issue #5704)
+  js_include: gpio-ui.js  # embeds gpio-ui.js in flash, served at /0.js
 
 # =============================================================================
 # OUTPUT PINS — switch entities (GPIO direction: output)
