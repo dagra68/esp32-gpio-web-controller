@@ -1,0 +1,143 @@
+# gpio-controller.yaml
+# ESPHome config for ESP32-C3-DevKitM-1
+# Source: ESPHome official docs verified 2026-03-15 (ESPHome 2026.2.4)
+#
+# Safe GPIO pins (11 total): 0, 1, 3, 4, 5, 6, 7, 10, 11, 20, 21
+# NEVER configure: 2 (strapping/boot-mode), 8 (strapping+on-board LED),
+#                  9 (strapping/download-mode), 12-17 (SPI flash bus),
+#                  18-19 (USB/JTAG — used by logger)
+
+esphome:
+  name: gpio-controller
+
+esp32:
+  board: esp32-c3-devkitm-1
+  variant: ESP32C3
+  framework:
+    type: esp-idf
+
+logger:
+  hardware_uart: USB_SERIAL_JTAG  # ESP32-C3: USB_SERIAL_JTAG not UART0
+  level: DEBUG                     # Use WARN in production to save RAM
+  # WARNING: Do NOT change hardware_uart to UART0 — that would conflict
+  # with GPIO 20 and GPIO 21 entities defined below.
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "GPIO Controller Fallback"
+
+api:
+  reboot_timeout: 0s  # Disable 15-min forced reboot when HA is not connected
+
+ota:
+  - platform: esphome  # Syntax required since ESPHome 2024.6.0 — do NOT use bare dict
+
+web_server:
+  port: 80
+  version: 3      # DO NOT REMOVE — default is v2; Phase 2 frontend requires v3
+  local: true     # Serve JS assets from device flash (offline-capable)
+
+# =============================================================================
+# OUTPUT PINS — switch entities (GPIO direction: output)
+# REST: POST /switch/GPIO {N}/turn_on|turn_off|toggle
+# SSE name_id: switch/GPIO {N}
+# =============================================================================
+switch:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode:
+        output: true
+    name: "GPIO 0"
+    id: gpio0_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO1
+      mode:
+        output: true
+    name: "GPIO 1"
+    id: gpio1_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO3
+      mode:
+        output: true
+    name: "GPIO 3"
+    id: gpio3_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO4
+      mode:
+        output: true
+    name: "GPIO 4"
+    id: gpio4_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO5
+      mode:
+        output: true
+    name: "GPIO 5"
+    id: gpio5_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO6
+      mode:
+        output: true
+    name: "GPIO 6"
+    id: gpio6_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO7
+      mode:
+        output: true
+    name: "GPIO 7"
+    id: gpio7_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO10
+      mode:
+        output: true
+    name: "GPIO 10"
+    id: gpio10_sw
+
+  - platform: gpio
+    pin:
+      number: GPIO11
+      mode:
+        output: true
+    name: "GPIO 11"
+    id: gpio11_sw
+
+# =============================================================================
+# INPUT PINS — binary_sensor entities (GPIO direction: input)
+# REST: GET /binary_sensor/GPIO {N}
+# SSE name_id: binary_sensor/GPIO {N}
+# pullup: true keeps the pin HIGH when floating (active-LOW convention)
+# =============================================================================
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO20
+      mode:
+        input: true
+        pullup: true
+    name: "GPIO 20"
+    id: gpio20_bs
+
+  - platform: gpio
+    pin:
+      number: GPIO21
+      mode:
+        input: true
+        pullup: true
+    name: "GPIO 21"
+    id: gpio21_bs
