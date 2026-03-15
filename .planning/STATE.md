@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
+stopped_at: Completed 01-01-PLAN.md — ESPHome YAML, secrets.yaml, .gitignore created and committed
+last_updated: "2026-03-15T22:20:16.409Z"
+last_activity: "2026-03-15 — Plan 01-01 complete: ESP32-C3 ESPHome YAML with all 11 safe GPIO pins"
+progress:
+  total_phases: 3
+  completed_phases: 1
+  total_plans: 2
+  completed_plans: 2
+  percent: 100
+---
+
 # Project State
 
 ## Project Reference
@@ -10,27 +26,27 @@ See: .planning/PROJECT.md (updated 2026-03-15)
 ## Current Position
 
 Phase: 1 of 3 (Firmware Foundation)
-Plan: 1 of TBD in current phase
-Status: In progress
-Last activity: 2026-03-15 — Plan 01-01 complete: ESP32-C3 ESPHome YAML with all 11 safe GPIO pins
+Plan: 2 of 2 in current phase
+Status: Awaiting human action (ESPHome install + USB flash + API verification)
+Last activity: 2026-03-15 — Plan 01-02 checkpoint: user must install ESPHome, fill secrets.yaml, flash ESP32-C3, and verify REST/SSE/native_api
 
-Progress: [█░░░░░░░░░] 10%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 3 min
-- Total execution time: 0.05 hours
+- Total plans completed: 2 (01-01 fully autonomous; 01-02 awaiting human action)
+- Average duration: ~3 min (autonomous portion)
+- Total execution time: 0.1 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-firmware-foundation | 1 | 3 min | 3 min |
+| 01-firmware-foundation | 2 | ~6 min | ~3 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (3 min)
+- Last 5 plans: 01-01 (3 min), 01-02 (pending human)
 - Trend: -
 
 *Updated after each plan completion*
@@ -49,19 +65,24 @@ Recent decisions affecting current work:
 - [01-01]: Entity names use "GPIO N" convention — REST URL token is GPIO%20N, SSE name_id is switch/GPIO N
 - [01-01]: api: reboot_timeout: 0s and logger hardware_uart: USB_SERIAL_JTAG pinned in YAML for ESP32-C3 stability
 - [01-01]: CORS confirmed absent from web_server v3 — Phase 2 frontend must be served same-origin from device
+- [01-02]: esphome run merges compile + flash in one command — no need for separate compile step
 
 ### Pending Todos
 
-- User must install ESPHome (`pip install esphome`) and run `esphome config gpio-controller.yaml` to complete FIRM-01/02/03 validation
-- User must replace placeholder WiFi credentials in `esp32-gpio-controller/secrets.yaml` before flashing
+- User must install ESPHome: `cd esp32-gpio-controller && python -m venv .venv && .venv\Scripts\activate && pip install esphome`
+- User must fill WiFi credentials in `esp32-gpio-controller/secrets.yaml` (replace "YourNetworkName" / "YourNetworkPassword")
+- User must connect ESP32-C3 via USB and run `esphome run gpio-controller.yaml`
+- User must verify REST, SSE, and native_api against the booted device (see 01-02-SUMMARY.md Steps 6-8)
+- Phase 2 is BLOCKED until Plan 01-02 human verification is complete
 
 ### Blockers/Concerns
 
-- [Phase 1]: Verify exact ESPHome `web_server` v3 SSE event JSON field names against a live device before writing the Phase 2 event parser — field names are MEDIUM confidence from training data
+- [Phase 1 — ACTIVE]: ESPHome not installed on system — user must install Python + ESPHome before any firmware compilation can proceed
+- [Phase 1 — ACTIVE]: Verify exact ESPHome `web_server` v3 SSE event JSON field names against a live device before writing the Phase 2 event parser — field names are MEDIUM confidence from training data
 - [Phase 1]: CORS confirmed absent from web_server v3 — Phase 2 frontend must be same-origin (served from device) or dev tooling must use CORS-disabled browser
 
 ## Session Continuity
 
 Last session: 2026-03-15
-Stopped at: Completed 01-01-PLAN.md — ESPHome YAML, secrets.yaml, .gitignore created and committed
+Stopped at: 01-02-PLAN.md Task 2 checkpoint — awaiting user: install ESPHome, fill secrets.yaml, flash ESP32-C3, verify REST/SSE/native_api. Resume with device IP or "approved" or "failed: description"
 Resume file: None

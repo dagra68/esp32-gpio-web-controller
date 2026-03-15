@@ -12,7 +12,7 @@ The project delivers in three phases driven by hard build-order dependencies. ES
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Firmware Foundation** - Flash ESPHome YAML with all GPIO entities, web_server v3, and native_api; verify REST and SSE API surface on the device
+- [x] **Phase 1: Firmware Foundation** - Flash ESPHome YAML with all GPIO entities, web_server v3, and native_api; verify REST and SSE API surface on the device (completed 2026-03-15)
 - [ ] **Phase 2: Frontend Read Path** - Deliver the pin grid with real-time state updates, type labels, HIGH/LOW badges, and connection status indicator
 - [ ] **Phase 3: Frontend Write Path** - Add output pin toggle controls and validate full system under concurrent load (browser SSE + HA native_api)
 
@@ -58,6 +58,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Firmware Foundation | 1/2 | In progress | - |
+| 1. Firmware Foundation | 2/2 | Complete   | 2026-03-15 |
 | 2. Frontend Read Path | 0/TBD | Not started | - |
 | 3. Frontend Write Path | 0/TBD | Not started | - |
