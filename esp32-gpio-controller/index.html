@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPIO Controller</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 0;
+      background: #1a1a1a;
+      color: #eee;
+    }
+
+    #status-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 6px;
+      text-align: center;
+      font-size: 13px;
+      display: none;
+    }
+    #status-banner.reconnecting {
+      display: block;
+      background: #b7791f;
+      color: #fff;
+    }
+    #status-banner.disconnected {
+      display: block;
+      background: #c53030;
+      color: #fff;
+    }
+
+    #pin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      padding: 60px 16px 16px;
+    }
+
+    .pin-card {
+      background: #2d2d2d;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pin-name {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .pin-type {
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+    .pin-type.switch {
+      background: #2b6cb0;
+      color: #fff;
+    }
+    .pin-type.binary_sensor {
+      background: #276749;
+      color: #fff;
+    }
+
+    .pin-state {
+      font-size: 13px;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .pin-state.high {
+      background: #276749;
+      color: #fff;
+    }
+    .pin-state.low {
+      background: #4a5568;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div id="status-banner"></div>
+  <div id="pin-grid"></div>
+  <script src="gpio-ui.js"></script>
+</body>
+</html>
