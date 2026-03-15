@@ -7,9 +7,9 @@
 
 ### Firmware
 
-- [ ] **FIRM-01**: ESPHome YAML defines all usable ESP32-C3 GPIO pins as switches (output) or binary_sensors (input), excluding reserved pins (strapping: GPIO 2, 8, 9; USB/JTAG: GPIO 18, 19)
-- [ ] **FIRM-02**: ESPHome `web_server` component enabled with `version: 3` explicitly set, exposing REST and SSE API on port 80
-- [ ] **FIRM-03**: ESPHome `native_api` component enabled for Home Assistant integration on port 6053
+- [x] **FIRM-01**: ESPHome YAML defines all usable ESP32-C3 GPIO pins as switches (output) or binary_sensors (input), excluding reserved pins (strapping: GPIO 2, 8, 9; USB/JTAG: GPIO 18, 19)
+- [x] **FIRM-02**: ESPHome `web_server` component enabled with `version: 3` explicitly set, exposing REST and SSE API on port 80
+- [x] **FIRM-03**: ESPHome `native_api` component enabled for Home Assistant integration on port 6053
 
 ### Frontend — Read Path
 
@@ -57,9 +57,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FIRM-01 | Phase 1 | Pending |
-| FIRM-02 | Phase 1 | Pending |
-| FIRM-03 | Phase 1 | Pending |
+| FIRM-01 | Phase 1 | Complete (01-01) |
+| FIRM-02 | Phase 1 | Complete (01-01) |
+| FIRM-03 | Phase 1 | Complete (01-01) |
 | READ-01 | Phase 2 | Pending |
 | READ-02 | Phase 2 | Pending |
 | READ-03 | Phase 2 | Pending |
@@ -74,4 +74,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-03-15*
-*Last updated: 2026-03-15 after roadmap creation*
+*Last updated: 2026-03-15 after 01-01 plan execution (FIRM-01, FIRM-02, FIRM-03 marked complete)*
