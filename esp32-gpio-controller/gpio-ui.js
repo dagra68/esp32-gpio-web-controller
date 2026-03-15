@@ -81,7 +81,8 @@ function connect() {
   // READ-01, READ-02, READ-03: receive entity state
   es.addEventListener('state', function(e) {
     var d = JSON.parse(e.data);
-    upsertPin(d.name_id, { name: d.name, domain: d.domain, state: d.state, value: d.value });
+    var prev = pins.get(d.name_id) || {};
+    upsertPin(d.name_id, { name: d.name || prev.name, domain: d.domain || prev.domain, state: d.state, value: d.value });
     // Fallback: if ping hasn't fired 500ms after first state event, render anyway
     if (!initialBurstDone && !burstFallbackTimer) {
       burstFallbackTimer = setTimeout(finishInitialBurst, 500);
