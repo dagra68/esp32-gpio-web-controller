@@ -1,0 +1,5 @@
+# Prevent WiFi credentials from being committed
+secrets.yaml
+
+# ESPHome build artifacts
+.esphome/
