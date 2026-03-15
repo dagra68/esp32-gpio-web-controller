@@ -58,6 +58,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Firmware Foundation | 0/TBD | Not started | - |
+| 1. Firmware Foundation | 0/2 | Planned | - |
 | 2. Frontend Read Path | 0/TBD | Not started | - |
 | 3. Frontend Write Path | 0/TBD | Not started | - |
