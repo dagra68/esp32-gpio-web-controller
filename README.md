@@ -1,4 +1,4 @@
-# ESP32-C3 GPIO Web Controller
+# ESP32 GPIO Web Controller
 
 A browser-based GPIO controller for the ESP32-C3, built with ESPHome. Toggle output pins and monitor input pin states in real-time from any browser on your local network.
 
