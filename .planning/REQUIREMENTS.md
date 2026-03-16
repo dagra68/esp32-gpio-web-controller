@@ -21,7 +21,7 @@
 
 ### Frontend — Write Path
 
-- [ ] **WRITE-01**: User can toggle any output pin on or off via a button that sends a REST POST to the ESP32-C3
+- [x] **WRITE-01**: User can toggle any output pin on or off via a button that sends a REST POST to the ESP32-C3
 
 ## v2 Requirements
 
@@ -65,7 +65,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | READ-03 | Phase 2 | Pending |
 | READ-04 | Phase 2 | Pending |
 | READ-05 | Phase 2 | Pending |
-| WRITE-01 | Phase 3 | Pending |
+| WRITE-01 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 9 total

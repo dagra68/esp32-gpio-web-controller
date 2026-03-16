@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Phase 1 complete — Plan 01-02 verification done. All three API surfaces confirmed on live device at 10.1.1.162.
-last_updated: "2026-03-15T23:49:25.185Z"
+stopped_at: Completed 03-01-PLAN.md — toggle write path done
+last_updated: "2026-03-16T00:04:18.029Z"
 last_activity: "2026-03-15 — Plan 01-02 complete: device at 10.1.1.162, REST/SSE/native_api all verified on live hardware"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 4
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
 ---
 
 ---
@@ -65,6 +65,7 @@ Progress: [███░░░░░░░] 33%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 03-frontend-write-path P01 | 2min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -83,6 +84,8 @@ Recent decisions affecting current work:
 - [01-02]: CORS IS PRESENT on web_server v3 (Access-Control-Allow-Origin: *) — Phase 2 frontend can call device API cross-origin from localhost dev server
 - [01-02]: POST to ESPHome web_server v3 requires Content-Length header; browser fetch() handles automatically, curl needs -H "Content-Length: 0"
 - [01-02]: SSE event shape confirmed from live device — name_id, id, domain, name, icon, entity_category, value, state, assumed_state fields all present
+- [Phase 03-frontend-write-path]: Event delegation on #pin-grid for toggle clicks — upsertPin() replaces card DOM on SSE state events, destroying per-button listeners
+- [Phase 03-frontend-write-path]: inFlight Set at module level prevents concurrent POSTs per pin; CSS.escape(nameId) handles slash/space in name_id for safe querySelector
 
 ### Confirmed Live Device Facts (Phase 2 Reference)
 
@@ -117,6 +120,6 @@ Recent decisions affecting current work:
 
 ## Session Continuity
 
-Last session: 2026-03-15
-Stopped at: Phase 1 complete — Plan 01-02 verification done. All three API surfaces confirmed on live device at 10.1.1.162.
+Last session: 2026-03-16T00:04:18.024Z
+Stopped at: Completed 03-01-PLAN.md — toggle write path done
 Resume file: None
