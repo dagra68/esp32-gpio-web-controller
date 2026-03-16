@@ -75,6 +75,7 @@ switch:
         output: true
     name: "GPIO 0"
     id: gpio0_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -83,6 +84,7 @@ switch:
         output: true
     name: "GPIO 1"
     id: gpio1_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -91,6 +93,7 @@ switch:
         output: true
     name: "GPIO 3"
     id: gpio3_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -99,6 +102,7 @@ switch:
         output: true
     name: "GPIO 4"
     id: gpio4_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -107,6 +111,7 @@ switch:
         output: true
     name: "GPIO 5"
     id: gpio5_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -115,6 +120,7 @@ switch:
         output: true
     name: "GPIO 6"
     id: gpio6_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -123,6 +129,7 @@ switch:
         output: true
     name: "GPIO 7"
     id: gpio7_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -131,6 +138,7 @@ switch:
         output: true
     name: "GPIO 10"
     id: gpio10_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -139,6 +147,7 @@ switch:
         output: true
     name: "GPIO 11"
     id: gpio11_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -147,6 +156,7 @@ switch:
         output: true
     name: "GPIO 20"
     id: gpio20_sw
+    restore_mode: ALWAYS_OFF
 
   - platform: gpio
     pin:
@@ -155,3 +165,4 @@ switch:
         output: true
     name: "GPIO 21"
     id: gpio21_sw
+    restore_mode: ALWAYS_OFF
