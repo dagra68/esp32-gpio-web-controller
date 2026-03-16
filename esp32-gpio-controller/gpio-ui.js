@@ -1,6 +1,6 @@
 // gpio-ui.js — ESP32-C3 GPIO Controller frontend
 // No framework, no build step, no dependencies.
-// Covers READ-01 through READ-05.
+// Covers READ-01 through READ-05, WRITE-01.
 
 const DEVICE_HOST = (location.hostname === 'localhost' || location.hostname === '')
   ? '10.1.1.162'   // dev: served from local server, calls device cross-origin
@@ -11,6 +11,7 @@ const pins = new Map(); // name_id -> {name, domain, state, value}
 let initialBurstDone = false;
 let burstFallbackTimer = null;
 let es = null;
+const inFlight = new Set(); // nameIds currently awaiting POST response
 
 // READ-04: show connection state — never silently stale
 function setStatus(status) {
@@ -30,6 +31,9 @@ function buildCard(nameId, pin) {
   card.className = 'pin-card';
   card.dataset.nameId = nameId;
   const high = pin.value === true;
+  const toggleBtn = pin.domain === 'switch'
+    ? '<button class="toggle-btn" data-name-id="' + nameId + '">Toggle</button>'
+    : '';
   card.innerHTML =
     '<div class="pin-name">' + pin.name + '</div>' +
     '<div class="pin-type ' + pin.domain + '">' +
@@ -37,8 +41,44 @@ function buildCard(nameId, pin) {
     '</div>' +
     '<div class="pin-state ' + (high ? 'high' : 'low') + '">' +
       (high ? 'HIGH' : 'LOW') +
-    '</div>';
+    '</div>' +
+    toggleBtn;
   return card;
+}
+
+// WRITE-01: send toggle POST to ESPHome REST API
+function sendToggle(nameId) {
+  if (inFlight.has(nameId)) return;
+  inFlight.add(nameId);
+  var parts = nameId.split('/');
+  var url = API_BASE + '/' + parts[0] + '/' + encodeURIComponent(parts[1]) + '/toggle';
+  fetch(url, { method: 'POST' })
+    .then(function(res) {
+      if (!res.ok) showToggleError(nameId, 'HTTP ' + res.status);
+    })
+    .catch(function() {
+      showToggleError(nameId, 'Unreachable');
+    })
+    .finally(function() {
+      inFlight.delete(nameId);
+    });
+}
+
+// WRITE-01: show transient error on the pin card
+function showToggleError(nameId, msg) {
+  var card = document.querySelector('[data-name-id="' + CSS.escape(nameId) + '"]');
+  if (!card) return;
+  var err = card.querySelector('.toggle-error');
+  if (!err) {
+    err = document.createElement('div');
+    err.className = 'toggle-error';
+    card.appendChild(err);
+  }
+  err.textContent = msg;
+  // Re-enable the button so user can retry
+  var btn = card.querySelector('.toggle-btn');
+  if (btn) btn.disabled = false;
+  setTimeout(function() { err.textContent = ''; }, 3000);
 }
 
 // Full grid render — called once after initial burst, and as fallback
@@ -112,4 +152,14 @@ function connect() {
   };
 }
 
-document.addEventListener('DOMContentLoaded', connect);
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('pin-grid').addEventListener('click', function(e) {
+    var btn = e.target.closest('.toggle-btn');
+    if (!btn) return;
+    var nameId = btn.dataset.nameId;
+    if (inFlight.has(nameId)) return;
+    btn.disabled = true;
+    sendToggle(nameId);
+  });
+  connect();
+});
