@@ -118,27 +118,18 @@ switch:
     name: "GPIO 11"
     id: gpio11_sw
 
-# =============================================================================
-# INPUT PINS — binary_sensor entities (GPIO direction: input)
-# REST: GET /binary_sensor/GPIO {N}
-# SSE name_id: binary_sensor/GPIO {N}
-# pullup: true keeps the pin HIGH when floating (active-LOW convention)
-# =============================================================================
-binary_sensor:
   - platform: gpio
     pin:
       number: GPIO20
       mode:
-        input: true
-        pullup: true
+        output: true
     name: "GPIO 20"
-    id: gpio20_bs
+    id: gpio20_sw
 
   - platform: gpio
     pin:
       number: GPIO21
       mode:
-        input: true
-        pullup: true
+        output: true
     name: "GPIO 21"
-    id: gpio21_bs
+    id: gpio21_sw
