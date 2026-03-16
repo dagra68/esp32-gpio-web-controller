@@ -41,6 +41,28 @@ web_server:
   js_include: gpio-ui.js  # embeds gpio-ui.js in flash, served at /0.js
 
 # =============================================================================
+# HOW TO CONFIGURE A PIN AS AN INPUT (binary_sensor)
+#
+# To monitor a pin instead of controlling it, replace its switch block with:
+#
+#   binary_sensor:
+#     - platform: gpio
+#       pin:
+#         number: GPIO20        # any safe pin (0,1,3,4,5,6,7,10,11,20,21)
+#         mode:
+#           input: true
+#           pullup: true        # keeps pin HIGH when floating (active-LOW)
+#       name: "GPIO 20"
+#       id: gpio20_bs
+#
+# After editing, reflash: esphome run gpio-controller.yaml
+#
+# REST:  GET  /binary_sensor/GPIO%2020
+# SSE name_id: binary_sensor/GPIO 20
+# State: HIGH = pin floating/pulled up, LOW = pin connected to GND
+# =============================================================================
+
+# =============================================================================
 # OUTPUT PINS — switch entities (GPIO direction: output)
 # REST: POST /switch/GPIO {N}/turn_on|turn_off|toggle
 # SSE name_id: switch/GPIO {N}

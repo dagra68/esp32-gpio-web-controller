@@ -96,6 +96,30 @@ CORS is open (`Access-Control-Allow-Origin: *`) — cross-origin requests work f
 
 The ESPHome native API runs on port 6053 in parallel with the web UI. Add the device in HA via **Settings → Devices & Services → ESPHome**.
 
+## Configuring a pin as input
+
+By default all 11 pins are configured as outputs. To monitor a pin instead of controlling it, replace its `switch` block in `gpio-controller.yaml` with a `binary_sensor`:
+
+```yaml
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO20        # any safe pin
+      mode:
+        input: true
+        pullup: true        # keeps pin HIGH when floating (active-LOW)
+    name: "GPIO 20"
+    id: gpio20_bs
+```
+
+Then reflash:
+
+```bash
+esphome run gpio-controller.yaml
+```
+
+The pin will appear in the UI as an INPUT with a live HIGH/LOW badge. Pin state is HIGH when floating and LOW when connected to GND.
+
 ## Project structure
 
 ```
