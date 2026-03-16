@@ -1,0 +1,3 @@
+.planning/
+esp32-gpio-controller/secrets.yaml
+esp32-gpio-controller/.esphome/
